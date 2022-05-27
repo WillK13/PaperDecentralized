@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Research Login</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
+</head>
+
+<body>
+    <button id="btn-login">Moraliss Login</button>
+    <button id="btn-logout">Logout</button>
+    <input type="text" id="myText">
+    <button id = "btn-enter">Upload Paper</button>
+    <p id="demo"></p>
+    <script>
+        "use strict";
+
+const serverUrl = "https://vvbfxzedx3uy.usemoralis.com:2053/server";
+const appId = "pQZR94ZEgcU9ziwMfhDLVezgJ9HbyYMdFl0CBJEk";
+Moralis.start({serverUrl, appId});
+
+
+async function login(){
+    let user = Moralis.User.current();
+    if(!user){
+        try{
+            user = await Moralis.authenticate({signingMessage: "Authenticate"})
+            await Moralis.enableWeb3();
+            console.log(user);
+            console.log(user.get('ethAddress'));
+
+        }catch(error){
+            console.log(error)
+        }
+    }
+}
+
+async function logOut(){
+    await Moralis.User.logOut();
+    console.log("logged out");
+}
+
+function enter() {
+    var x = document.getElementById("myText").value;
+    document.getElementById("demo").innerHTML = x;
+    console.log(x);
+  }
+
+async function uploadPaper(){
+    var x = document.getElementById("myText").value;
+    document.getElementById("demo").innerHTML = x;
+
+    let example = {
+        contractAddress: "0x6618eAD97f6eA264273b75B3E73c582d74CCB5d9",
+         functionName: "uploadPaper",
+         abi:{"inputs":[{"internalType":"uint256","name":"_paperOwnerId","type":"uint256"},{"internalType":"uint256","name":"_paperCost","type":"uint256"},{"internalType":"string","name":"_paperTitle","type":"string"}],"name":"uploadPaper","outputs":[],"stateMutability":"nonpayable","type":"function"},
+         params:{
+            _paperOwnerId: 0xDF1e7aD4993229D2214c36D96F58dE25A400329B,
+            _paperCost: 2,
+            _paperTitle: x},
+         msgValue: Moralis.Units.ETH(0)
+    }
+    await Moralis.executeFunction(example);
+}
+
+
+document.getElementById("btn-login").onclick = login;
+document.getElementById("btn-logout").onclick = logOut;
+document.getElementById("btn-enter").onclick = uploadPaper;
+
+
+    </script>
+</body>
+
+</html>
+
