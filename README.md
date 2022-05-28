@@ -1,7 +1,7 @@
 # PaperDecentralized
 PaperDecentralized is a novel opportunity for authors to publish their scientific papers without the need for a publisher. Using the power of the Ethereum blockchain and the ipfs, you can upload your paper as an NFT which can be sold to anyone in the world. This allows for the authors to maximize profits on their hard work. Users can request papers and receive a pdf copy as an NFT. This eliminates the need for a middleman such as a publishing company who controls what scientific work is released and takes a majority of the income.
 <br />
-<img src="/Logo.png" alt="Logo" width=500/>
+<img src="/Logo.png" alt="PD_Logo" width=500/>
 <br />
 ## Built With:
 <br />
